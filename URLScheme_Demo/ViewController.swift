@@ -10,16 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var phoneBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        print("ViewDidLoad")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func phoneBtnPressed(_ sender: Any) {
+        if let phoneStr = phoneBtn.titleLabel?.text {
+            //撥 718 分機 p 為等待一秒
+            guard let url = URL(string: "tel:" + phoneStr + "p718") else {return}
+            if UIApplication.shared.canOpenURL(url) {
+                print("Open")
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
     }
-
-
 }
 
